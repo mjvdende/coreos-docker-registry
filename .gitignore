@@ -1,0 +1,4 @@
+.vagrant/
+log/
+!registry
+!registry/.git-keep
