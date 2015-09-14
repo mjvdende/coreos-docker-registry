@@ -42,7 +42,6 @@ coreos:
       TimeoutStartSec=0
       ExecStartPre=-/usr/bin/docker kill registry
       ExecStartPre=-/usr/bin/docker rm registry
-      ExecStartPre=-/usr/bin/mkdir -p /home/core/registry
       ExecStart=/usr/bin/docker run \
                        -e STORAGE_PATH=/registry \
                        -e SEARCH_BACKEND=sqlalchemy \
@@ -52,23 +51,22 @@ coreos:
                        --name="registry" \
                        registry
       ExecStop=/usr/bin/docker stop registry
-  - name: docker-registry-web.service
+  - name: file-server.service
     command: start
     enable: true
     content: |
       [Unit]
-      Description=Docker Registry Web UI
+      Description=Websever
       After=docker.service
       Requires=docker.service
 
       [Service]
       TimeoutStartSec=0
-      ExecStartPre=-/usr/bin/docker kill registry-web
-      ExecStartPre=-/usr/bin/docker rm registry-web
+      ExecStartPre=-/usr/bin/docker kill file-server
+      ExecStartPre=-/usr/bin/docker rm fileserver
       ExecStart=/usr/bin/docker run \
-                       -e ENV_DOCKER_REGISTRY_HOST=http://$public_ipv4 \
-                       -e ENV_DOCKER_REGISTRY_PORT=5000 \
-                       -p 8181:80 \
-                       --name="registry-web" \
-                       konradkleine/docker-registry-frontend
-      ExecStop=/usr/bin/docker stop registry-web
+                       -v /registry:/www \
+                       -p 80:80 \
+                       --name="file-server" \
+                       fnichol/uhttpd
+      ExecStop=/usr/bin/docker stop file-server

@@ -61,8 +61,4 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "registry", "/registry", id: "core", nfs: true, mount_options: ['nolock,vers=3,udp']
   config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true
 
-  config.vm.provision 'shell' do |s|
-    s.path = 'provision.sh'
-  end
-
 end

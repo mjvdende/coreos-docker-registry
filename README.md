@@ -24,7 +24,6 @@ Therefor you can follow the progress of services booting when logging on to a co
 
 - docker.service
 - docker-registry.service - URL: [Registry](http://172.17.8.128:5000) (login:root-root)
-- docker-registry-web.service - URL: [Registry Web](http://172.17.8.128:8181)
 
 ## Config
 
