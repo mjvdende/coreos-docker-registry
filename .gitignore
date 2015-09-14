@@ -1,4 +1,5 @@
+*.tar.gz
 .vagrant/
 log/
-!registry
+registry
 !registry/.git-keep

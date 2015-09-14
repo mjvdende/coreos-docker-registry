@@ -1,5 +1,6 @@
 # coreos-docker-registry
 
+_Docker registry created for project [Scalable QA with Docker](https://github.com/xebia/scalable-qa-with-docker). Place contents from registry-contents in registry directory, see [releases](https://github.com/mjvdende/coreos-docker-registry/releases)_
 _Current set up allocats 2 CPU and 2 GB of memory._
 
 Given:
@@ -18,12 +19,13 @@ It can take a while before services are started because docker is downloading im
 Therefor you can follow the progress of services booting when logging on to a core, for example core-01.
 
     $ vagrant ssh
-    $ journalctl -u docker-registry-web.service -f
+    $ journalctl -u docker-registry -f
 
-## core-01
+## Docker registry
 
 - docker.service
-- docker-registry.service - URL: [Registry](http://172.17.8.128:5000) (login:root-root)
+- docker-registry.service - URL: [Registry](http://172.17.8.128:5000)
+- file-server.service - URL: [file-server](http://172.17.8.128)
 
 ## Config
 
